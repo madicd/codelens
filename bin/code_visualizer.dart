@@ -112,6 +112,26 @@ String getGitRootDirectory(String directoryPath) {
   return trim.replaceAll('/', Platform.pathSeparator);
 }
 
+bool _shouldIgnoreFile(String filePath, List<String> ignorePatterns) {
+  final fileName = path.basename(filePath);
+
+  for (final pattern in ignorePatterns) {
+    if (pattern.startsWith('.') && pattern.endsWith('.')) {
+      // Pattern like '.g.' - check if it's contained in the filename
+      if (fileName.contains(pattern)) {
+        return true;
+      }
+    } else {
+      // Pattern like 'app_localizations' - check if filename starts with it
+      if (fileName.startsWith(pattern)) {
+        return true;
+      }
+    }
+  }
+
+  return false;
+}
+
 void main(List<String> arguments) {
   if (arguments.isEmpty) {
     print('Usage: dart visualizer.dart <directory>');
@@ -134,10 +154,28 @@ void main(List<String> arguments) {
   print('Loading commit counts...');
   final commitCounts = getCommitCounts(directoryPath);
 
-  final dartFiles = directory
+  // Define patterns for files to ignore
+  final ignorePatterns = [
+    'app_localizations', // Ignore auto-generated localization files
+    '.g.', // Ignore code generation files (e.g., *.g.dart)
+    '.freezed.', // Ignore Freezed generated files
+    '.gr.', // Ignore auto_route generated files
+  ];
+
+  final allDartFiles = directory
       .listSync(recursive: true)
       .where((file) => file.path.endsWith('.dart'));
 
+  final dartFiles = allDartFiles.where(
+    (file) => !_shouldIgnoreFile(file.path, ignorePatterns),
+  );
+
+  final ignoredCount = allDartFiles.length - dartFiles.length;
+  if (ignoredCount > 0) {
+    print('Ignored $ignoredCount auto-generated files');
+  } else {
+    print('Did not ignore any files');
+  }
   print('Processing ${dartFiles.length} files...');
   final List<ClassModel> allClassModels = [];
   for (var file in dartFiles) {

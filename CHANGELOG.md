@@ -1,3 +1,8 @@
+## 1.2.0
+
+- Added automatic filtering of auto-generated files (app_localizations_*.dart, *.g.dart, *.freezed.dart, *.gr.dart)
+- Improved output to show count of ignored files during processing
+
 ## 1.1.0
 
 - The CLI now generates a self-contained `index.html` file with the visualization and data bundled together
