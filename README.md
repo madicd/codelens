@@ -22,10 +22,10 @@ This is inspired by the book [Your Code as a Crime Scene](https://learning.oreil
 Run instructions:
 
 ```bash
-git clone https://github.com/madicd/code_visualizer.git
-dart pub global activate -spath code_visualizer
+git clone https://github.com/madicd/codelens.git
+dart pub global activate -spath codelens
 cd <APP_TO_ANALYZE_PATH>
-code_visualizer lib # generates self-contained index.html
+codelens lib # generates self-contained index.html
 open index.html
 ```
 

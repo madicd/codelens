@@ -1,3 +1,6 @@
+## 1.2.1
+- Rename to codelens
+
 ## 1.2.0
 
 - Added automatic filtering of auto-generated files (app_localizations_*.dart, *.g.dart, *.freezed.dart, *.gr.dart)

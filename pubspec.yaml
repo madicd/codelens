@@ -1,10 +1,10 @@
-name: code_visualizer
+name: codelens
 description: Visualizes size and change frequency of Dart classes in your codebase.
-version: 1.2.0
-repository: https://github.com/madicd/code_visualizer
+version: 1.2.1
+repository: https://github.com/madicd/codelens
 
 executables:
-    code_visualizer:
+    codelens:
 
 environment:
   sdk: ^3.7.0

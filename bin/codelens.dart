@@ -134,10 +134,10 @@ bool _shouldIgnoreFile(String filePath, List<String> ignorePatterns) {
 
 void main(List<String> arguments) {
   if (arguments.isEmpty) {
-    print('Usage: dart visualizer.dart <directory>');
+    print('Usage: dart codelens.dart <directory>');
     exit(1);
   }
-  print('Starting code visualizer...');
+  print('Starting codelens...');
 
   final stopwatch = Stopwatch()..start();
   final directoryPath = arguments.first;
